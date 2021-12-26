@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <a href="{{url_for('register') }}">Are you a guest? sign up</a><br>
+
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    {{ form.username }}
+    {{ form.password }}
+    {{ form.submit }}
+
+
+
+</body>
+</html>
