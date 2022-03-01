@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask import send_from_directory, abort
@@ -8,21 +8,17 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
-from flask_security import Security, SQLAlchemyUserDatastore
 
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
 admin = Admin(app)
 
-
 bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SECRET_KEY'] = 'a secret key is needed'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///admin.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////admin.db'
 app.config['SECRET_KEY'] = 'my secret key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-app.config['SECRET_KEY'] = 'my secret'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -32,34 +28,17 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+class Admin(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
 
-roles_users = db.Table('role_users', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-                       db.Column('role_id', db.Integer, db.ForeignKey('role.id')))
+admin.add_view(ModelView)
 
-
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
-    active = db.Column(db.Boolean)
-    confirmed_at = db.Column(db.DateTime)
 
-class Role(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40))
-    description = db.Column(db.String(255))
-
-
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
-
-
-class Person(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False, unique=True)
-    password = db.Column(db.String(80), nullable=False)
-
-admin.add_view(ModelView(Person,db.session))
 
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)],
@@ -165,7 +144,6 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form)
-
 
 
 
