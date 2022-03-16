@@ -44,6 +44,7 @@ Takes logs of users having access to uploaded contents on a webpage. An email is
 
 *This is a sample project with a dummy database included in the project files*
 
+
 ## ===== Dummy Database Initialisation =====
 1. Lauch Terminal in your IDE of choice
 2. Navigate to the directory of the database
@@ -57,3 +58,13 @@ from app import db
 ```
 db.tables
 ```
+
+## Installation
+1. With the above steps already executed
+2. Open the python files in the IDE
+3. Run app.py
+
+**"Suggestions and improvements are invited"**
+    Thanks a lot
+    Ella_Emefa
+    Project Leader
