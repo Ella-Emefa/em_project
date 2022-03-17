@@ -37,6 +37,7 @@ Takes logs of users having access to uploaded contents on a webpage. An email is
 * Sqlite3
 
 ## ====== Software & Tools Used ======
+
 - VS Code
 - Pycharm Community Edition
 - SQLite3
@@ -46,6 +47,7 @@ Takes logs of users having access to uploaded contents on a webpage. An email is
 
 
 ## ===== Dummy Database Initialisation =====
+
 1. Lauch Terminal in your IDE of choice
 2. Navigate to the directory of the database
 3. Copy and paste the following commands:
@@ -60,11 +62,14 @@ db.tables
 ```
 
 ## Installation
+
 1. With the above steps already executed
 2. Open the python files in the IDE
 3. Run app.py
 
-**"Suggestions and improvements are invited"**
-    Thanks a lot
-    Ella_Emefa
-    Project Leader
+
+**Suggestions and improvements are invited**
+
+   <br> Thanks a lot </br>
+    <br>Ella_Emefa </br>
+   <br> Project Leader </br>
